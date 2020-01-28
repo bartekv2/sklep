@@ -1,0 +1,34 @@
+<h2 class="text-gray-300">Produkty</h2>
+<%= link_to new_admin_product_path, class: "btn" do %>
+  Dodaj nowy produkt
+<% end %>
+
+<div class="">
+  <%= search_form_for [:admin, @q] do |f| %>
+    <%= f.text_field :name_or_description_or_long_description_cont, placeholder: "Search" %>
+    <%= f.text_field :price_gt, placeholder: "Price >" %>
+    <%= f.submit "Search" %>
+  <% end %>
+</div>
+
+<table class="table-auto my-4">
+  <thead>
+    <tr>
+      <th class="border border-gray-600 px-4 py-2"><%= sort_link(@q, :name, "Nazwa") %></th>
+      <th class="border border-gray-600 px-4 py-2"><%= sort_link(@q, :price, "Cena") %></th>
+      <th class="border border-gray-600 px-4 py-2">Kategoria</th>
+      <th class="border border-gray-600 px-4 py-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <td class="border border-gray-600 px-4 py-2"><%= product.name %></td>
+      <td class="border border-gray-600 px-4 py-2"><%= number_to_currency product.price %></td>
+      <td class="border border-gray-600 px-4 py-2"><%= product.category.name %></td>
+      <td class="border border-gray-600 px-4 py-2"><%= link_to "Edycja", edit_admin_product_path(product), class: "btn" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @products %>

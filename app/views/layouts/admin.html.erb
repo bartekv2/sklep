@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sklep Bartka - Admin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Hind+Guntur&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+  </head>
+
+  <body class="bg-gray-800 pb-10 text-gray-300">
+
+    <header class="flex items-center justify-between flex-wrap pt-5 pb-3">
+      <div class="container mx-auto">
+        <div class="flex">
+          <div id="logo" class="tracking-wider relative" style="font-family: 'Permanent Marker', cursive;">
+            <h1 class="flex items-center flex-shrink-0 font-bold text-5xl">
+              <a class="text-gray-300"" href="<%= root_path %>">Planets <span class="text-red-600">from</span> Space</a>
+            </h1>
+            <span class="text-lg absolute top-0 mt-12 pt-1 right-0">
+              <em class="text-blue-600">all the good t-shirts</em>
+            </span>
+          </div>
+          <nav class="font-medium w-full block flex-grow lg:flex lg:items-end lg:w-auto justify-end tracking-wider">
+            <ul class="lg:flex">
+              <li<% if params[:controller] == "admin/products" %> class="active"<% end %>><%= link_to "Produkty", admin_products_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-200 mr-4" %></li>
+              <li<% if params[:controller] == "admin/categories" %> class="active"<% end %>><%= link_to "Kategorie", admin_categories_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-200 mr-4" %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+
+    <section class="flex container mx-auto">
+      <main>
+        <%= yield %>
+      </main>
+    </section>
+
+
+  </body>
+</html>

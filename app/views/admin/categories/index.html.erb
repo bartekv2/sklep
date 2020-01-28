@@ -1,0 +1,21 @@
+<h2 class="text-gray-300">Kategorie</h2>
+<%= link_to new_admin_category_path, class: "btn" do %>
+  Dodaj nową kategorię
+<% end %>
+
+<table class="table-auto my-4">
+  <thead>
+    <tr>
+      <th class="border border-gray-600 px-4 py-2">Nazwa</th>
+      <th class="border border-gray-600 px-4 py-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+    <tr>
+      <td class="border border-gray-600 px-4 py-2"><%= category.name %></td>
+      <td class="border border-gray-600 px-4 py-2"><%= link_to "Edycja", edit_admin_category_path(category), class: "btn" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {font-family: 'Hind Guntur', sans-serif;}
+
+h2 {
+  @apply mb-2 text-2xl font-bold text-gray-900;
+}
+
+.btn {
+  @apply inline-block rounded-lg shadow-lg bg-blue-600 text-xs text-white px-3 pt-2 pb-1 uppercase tracking-wider font-semibold;
+}
+
+.btn:hover {
+  @apply bg-blue-500;
+}
+
+.btn:focus {
+  @apply outline-none shadow-outline;
+}
+
+.btn:active {
+  @apply bg-blue-700;
+}
+
+.active a {
+@apply text-blue-600;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sklep</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Hind+Guntur&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
+  </head>
+
+  <body class="bg-gray-200">
+    <header class="flex items-center justify-between flex-wrap pt-5 pb-3">
+      <div class="container mx-auto">
+        <div class="flex">
+          <div id="logo" class="tracking-wider relative" style="font-family: 'Permanent Marker', cursive;">
+            <h1 class="flex items-center flex-shrink-0 font-bold text-5xl">
+              <a class="text-gray-900" href="<%= root_path %>">Planets <span class="text-red-600">from</span> Space</a>
+            </h1>
+            <span class="text-lg absolute top-0 mt-12 pt-1 right-0">
+              <em class="text-blue-600">all the good t-shirts</em>
+            </span>
+          </div>
+          <nav class="font-medium w-full block flex-grow lg:flex lg:items-end lg:w-auto justify-end tracking-wider">
+          <ul class="lg:flex">
+            <li<% if [params[:controller], params[:action]] == ["products", "index"] %> class="active"<% end %>><%= link_to "Start", root_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+            <li<% if [params[:controller], params[:action]] == ["static", "privacy"] %> class="active"<% end %>><%= link_to "Polityka prywatności", privacy_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+            <li<% if [params[:controller], params[:action]] == ["static", "terms"] %> class="active"<% end %>><%= link_to "Regulamin", terms_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+            <li<% if [params[:controller], params[:action]] == ["static", "shipping"] %> class="active"<% end %>><%= link_to "Dostawa i płatności", shipping_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+            <li<% if [params[:controller], params[:action]] == ["static", "about"] %> class="active"<% end %>><%= link_to "O sklepie", about_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+          </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section class="flex container mx-auto mt-8">
+      <aside class="pt-10 pr-8">
+        <ul>
+          <% Category.all.each do |category| %>
+          <li class="pb-4<% if @category == category %> active<% end %>">
+            <%= link_to category.name, category_path(category), class: "text-gray-800 hover:text-gray-700" %>
+          </li>
+          <% end %>
+        </ul>
+      </aside>
+      <main>
+        <%= yield %>
+      </main>
+    </section>
+
+    <footer class="bg-gray-400 py-4">
+      <div class="container mx-auto text-center">© 2020 All rights reserved</div>
+    </footer>
+
+
+  </body>
+</html>
