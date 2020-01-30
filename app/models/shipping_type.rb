@@ -1,2 +1,2 @@
-class ShippingType < ApplicationRecord
+class ShippingType < ActiveRecord::Base
 end

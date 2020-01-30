@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
-  get 'cart/show'
-  get 'cart/edit'
-  get 'cart/confirmation'
+  namespace :admin do
+    get 'orders/index'
+    get 'orders/show'
+  end
+  resource :cart, controller: "cart", only: [:show, :update, :edit] do
+    member do
+      post :add_product
+      post :remove_product
+      get :confirmation
+      post :finish
+    end
+  end
   namespace :admin do
     root to: 'products#index'
     resources :products
     resources :categories
+    resources :orders, only: [:show, :index, :update]
   end
 
   get 'regulamin', to: "static#terms", as: :terms

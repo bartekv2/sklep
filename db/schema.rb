@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_25_094622) do
+ActiveRecord::Schema.define(version: 2020_01_28_124730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2020_01_25_094622) do
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.bigint "product_id", null: false
+    t.bigint "product_id"
     t.decimal "unit_price"
     t.integer "quantity"
-    t.bigint "order_id", null: false
+    t.bigint "order_id"
     t.string "item_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_01_25_094622) do
 
   create_table "orders", force: :cascade do |t|
     t.text "comment"
-    t.bigint "shipping_type_id", null: false
+    t.bigint "shipping_type_id"
     t.decimal "shipping_cost"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 2020_01_25_094622) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "addresses", "orders"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "orders", "shipping_types"

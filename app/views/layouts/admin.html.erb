@@ -27,6 +27,7 @@
             <ul class="lg:flex">
               <li<% if params[:controller] == "admin/products" %> class="active"<% end %>><%= link_to "Produkty", admin_products_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-200 mr-4" %></li>
               <li<% if params[:controller] == "admin/categories" %> class="active"<% end %>><%= link_to "Kategorie", admin_categories_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-200 mr-4" %></li>
+              <li<% if params[:controller] == "admin/orders" %> class="active"<% end %>><%= link_to "Zamówienia", admin_orders_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-300 hover:text-gray-200 mr-4" %></li>
             </ul>
           </nav>
         </div>
@@ -36,6 +37,11 @@
 
     <section class="flex container mx-auto">
       <main>
+        <% flash.each do |type, msg| %>
+          <div>
+            <%= msg %>
+          </div>
+        <% end %>
         <%= yield %>
       </main>
     </section>

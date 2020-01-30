@@ -25,7 +25,7 @@ class OrderStateMachine
   end
 
   after_transition(to: :shipped) do |order, transition|
-    OrderMailer.order_shippedn(order).deliver
+    OrderMailer.order_shipped(order).deliver
   end
 
   def self.states_map

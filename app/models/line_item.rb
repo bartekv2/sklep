@@ -4,4 +4,5 @@ class LineItem < ApplicationRecord
 
   def full_price
     unit_price * quantity
+  end
 end

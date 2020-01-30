@@ -1,8 +1,11 @@
 class Order < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordQueries
-  belongs_to :shipping_type
+  include Statesman::Adapters::ActiveRecordQueries[
+    transition_class: OrderTransition,
+    initial_state: :pending
+  ]
+  belongs_to :shipping_type, optional: true
   has_many :line_items
-  has_one :address
+  has_one :address, :dependent => :destroy
   has_many :transitions, class_name: "OrderTransition", autosave: false
 
   accepts_nested_attributes_for :address

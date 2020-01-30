@@ -10,7 +10,7 @@
         <p><%= simple_format(product.description.truncate(90)) %></p>
         <p><%= number_to_currency product.price %></p>
         <p>
-          <%= link_to "#", class: "btn" do %>
+          <%= link_to add_product_cart_path(product_id: product.id), method: :post, class: "btn" do %>
            Buy Now
           <% end %>
         </p>

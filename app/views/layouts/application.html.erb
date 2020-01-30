@@ -33,6 +33,15 @@
             <li<% if [params[:controller], params[:action]] == ["static", "shipping"] %> class="active"<% end %>><%= link_to "Dostawa i płatności", shipping_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
             <li<% if [params[:controller], params[:action]] == ["static", "about"] %> class="active"<% end %>><%= link_to "O sklepie", about_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
           </ul>
+          <ul>
+            <li>
+              <%= link_to cart_path do %>
+                <%= current_cart.line_items.map { |e| e.quantity }.sum %>
+                produktów za
+                <%= number_to_currency(current_cart.line_items.map { |e| e.full_price }.sum) %>
+              <% end %>
+            </li>
+          </ul>
           </nav>
         </div>
       </div>
@@ -49,6 +58,11 @@
         </ul>
       </aside>
       <main>
+        <% flash.each do |type, msg| %>
+          <div>
+            <%= msg %>
+          </div>
+        <% end %>
         <%= yield %>
       </main>
     </section>
