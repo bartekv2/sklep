@@ -8,7 +8,7 @@ set :repo_url, "https://github.com/bartekv2/sklep.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/home/deploy/#{fetch :application}"
+set :deploy_to, "/home/deploy/apps/#{fetch :application}"
 
 
 # Default value for :format is :airbrussh.
