@@ -27,3 +27,35 @@ h2 {
 .active a {
 @apply text-blue-600;
 }
+
+form {
+  @apply text-gray-700;
+}
+
+label {
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
+
+#admin label {
+  @apply text-gray-200;
+}
+
+#cart-form input, #cart-form textarea {
+  @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight;
+}
+
+#cart-form input:focus, #cart-form textarea:focus, #cart-form select:focus, .form-select:focus {
+  @apply outline-none bg-white border-gray-500 shadow-none;
+}
+
+#cart-form select, .form-select {
+  @apply block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
+}
+
+#cart-form .error {
+  @apply text-red-500 text-xs italic;
+}
+
+#cart-form .field_with_errors input, #cart-form .field_with_errors textarea {
+  @apply border-red-500;
+}

@@ -1,13 +1,13 @@
 <h2 class="text-gray-300">Produkty</h2>
-<%= link_to new_admin_product_path, class: "btn" do %>
+<%= link_to new_admin_product_path, class: "btn mb-6" do %>
   Dodaj nowy produkt
 <% end %>
 
 <div class="">
   <%= search_form_for [:admin, @q] do |f| %>
-    <%= f.text_field :name_or_description_or_long_description_cont, placeholder: "Search" %>
-    <%= f.text_field :price_gt, placeholder: "Price >" %>
-    <%= f.submit "Search" %>
+    <%= f.text_field :name_or_description_or_long_description_cont, placeholder: "Search", class: 'form-input mb-6' %>
+    <%= f.text_field :price_gt, placeholder: "Price >", class: 'form-input mb-6' %>
+    <%= f.submit "Search", class: "btn cursor-pointer" %>
   <% end %>
 </div>
 
