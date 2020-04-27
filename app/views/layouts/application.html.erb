@@ -6,33 +6,22 @@
     <%= csp_meta_tag %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Hind+Guntur&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
   </head>
 
-  <body class="bg-gray-200">
+  <body class="bg-blue-200 text-gray-800">
     <header class="flex items-center justify-between flex-wrap pt-5 pb-3">
       <div class="container mx-auto">
         <div class="flex">
-          <div id="logo" class="tracking-wider relative" style="font-family: 'Permanent Marker', cursive;">
+          <div id="logo" class="tracking-wider relative">
             <h1 class="flex items-center flex-shrink-0 font-bold text-5xl">
-              <a class="text-gray-900" href="<%= root_path %>">Planets <span class="text-red-600">from</span> Space</a>
+              <a class="text-gray-800 hover:text-gray-800" href="<%= root_path %>">Najzabawniejsza Koszulka Świata</a>
             </h1>
-            <span class="text-lg absolute top-0 mt-12 pt-1 right-0">
-              <em class="text-blue-600">all the good t-shirts</em>
-            </span>
           </div>
           <nav class="font-medium w-full block flex-grow lg:flex lg:items-end lg:w-auto justify-end tracking-wider">
-          <ul class="lg:flex">
-            <li<% if [params[:controller], params[:action]] == ["products", "index"] %> class="active"<% end %>><%= link_to "Start", root_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
-            <li<% if [params[:controller], params[:action]] == ["static", "privacy"] %> class="active"<% end %>><%= link_to "Polityka prywatności", privacy_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
-            <li<% if [params[:controller], params[:action]] == ["static", "terms"] %> class="active"<% end %>><%= link_to "Regulamin", terms_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
-            <li<% if [params[:controller], params[:action]] == ["static", "shipping"] %> class="active"<% end %>><%= link_to "Dostawa i płatności", shipping_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
-            <li<% if [params[:controller], params[:action]] == ["static", "about"] %> class="active"<% end %>><%= link_to "O sklepie", about_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
-          </ul>
           <ul>
             <li>
-              <%= link_to cart_path do %>
+              <%= active_link_to cart_path do %>
                 <%= current_cart.line_items.map { |e| e.quantity }.sum %>
                 produktów za
                 <%= number_to_currency(current_cart.line_items.map { |e| e.full_price }.sum) %>
@@ -45,26 +34,30 @@
     </header>
 
     <section class="flex container mx-auto mt-8">
-      <aside class="pt-10 pr-8">
-        <ul>
-          <% Category.all.each do |category| %>
-          <li class="pb-4<% if @category == category %> active<% end %>">
-            <%= link_to category.name, category_path(category), class: "text-gray-800 hover:text-gray-700" %>
-          </li>
-          <% end %>
-        </ul>
-      </aside>
       <main>
-        <% flash.each do |type, msg| %>
-          <div>
-            <%= msg %>
-          </div>
-        <% end %>
+        <% if !flash.empty? %>
+          <div class="inline-block border border-teal-500 rounded bg-teal-100 px-4 py-3 mb-6 text-teal-900 alert" role="alert">
+            <div class="flex items-center">
+              <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <% flash.each do |type, msg| %>
+                  <div><%= msg %></div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         <%= yield %>
       </main>
     </section>
 
-    <footer class="bg-gray-400 py-4">
+    <footer class="bg-blue-300 py-6 mt-6">
+      <nav class="container mx-auto mb-4">
+        <ul class="lg:flex justify-center">
+          <li><%= active_link_to "Polityka prywatności", privacy_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+          <li><%= active_link_to "Regulamin", terms_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+          <li><%= active_link_to "Dostawa i płatności", shipping_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+          <li><%= active_link_to "O sklepie", about_path, class:"block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-700 mr-4" %></li>
+        </ul>
+      </nav>
       <div class="container mx-auto text-center">© 2020 All rights reserved</div>
     </footer>
 

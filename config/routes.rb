@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     member do
       post :add_product
       post :remove_product
+      get :payment
       get :confirmation
+      get :finish
       post :finish
     end
   end

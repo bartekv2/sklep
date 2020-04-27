@@ -8,6 +8,9 @@ class Order < ActiveRecord::Base
   has_one :address, :dependent => :destroy
   has_many :transitions, class_name: "OrderTransition", autosave: false
 
+  validates :bylaw, acceptance: { message: 'Akceptacja regulaminu dotpay.pl jest wymagana.' }
+  validates :personal_data, acceptance: { message: 'Akceptacja polityki prywatności dotpay.pl jest wymagana.' }
+
   accepts_nested_attributes_for :address
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,

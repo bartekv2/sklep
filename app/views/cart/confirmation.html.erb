@@ -10,7 +10,7 @@
   <tbody>
     <% @cart.line_items.each do |line_item| %>
       <tr>
-        <td><%= link_to line_item.item_name, product_path(line_item.product) %>
+        <td><%= active_link_to line_item.item_name, product_path(line_item.product) %>
         <td><%= line_item.quantity %></td>
         <td><%= number_to_currency line_item.unit_price %></td>
         <td><%= number_to_currency line_item.full_price %></td>
@@ -31,7 +31,19 @@
     </tr>
   </tbody>
 </table>
-
-<%= link_to finish_cart_path, method: :post, class: "btn" do %>
-  Potwierdzam zamówienie z obowiązkiem zapłaty
+<%= form_with(url: "https://ssl.dotpay.pl/test_payment/", method: "post", local: true) do %>
+  <%= hidden_field_tag(:id, @id) %>
+  <%= hidden_field_tag(:amount, @amount) %>
+  <%= hidden_field_tag(:currency, @currency) %>
+  <%= hidden_field_tag(:description, @description) %>
+  <%= hidden_field_tag(:channel, @channel) %>
+  <%= hidden_field_tag(:url, @url) %>
+  <%= hidden_field_tag(:type, @type) %>
+  <%= hidden_field_tag(:firstname, @firstname) %>
+  <%= hidden_field_tag(:lastname, @lastname) %>
+  <%= hidden_field_tag(:email, @email) %>
+  <%= hidden_field_tag(:bylaw, @bylaw) %>
+  <%= hidden_field_tag(:personal_data, @personal_data) %>
+  <%= hidden_field_tag(:chk, calculateChk("xdKQWOGLpDQYWaDtFmruxu3dBMwOUMYS", @id, @amount, @currency, @description, @channel, @url, @type, @firstname, @lastname, @email, @bylaw, @personal_data)) %>
+  <%= submit_tag "Zamawiam i płacę", :class => "btn cursor-pointer" %>
 <% end %>

@@ -2,54 +2,66 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-html {font-family: 'Hind Guntur', sans-serif;}
+html {font-family: 'Kanit', sans-serif;}
+
+body {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
 
 h2 {
-  @apply mb-2 text-2xl font-bold text-gray-900;
+  @apply mb-2 text-2xl font-bold text-gray-800 tracking-wider;
 }
 
 .btn {
-  @apply inline-block rounded-lg shadow-lg bg-blue-600 text-xs text-white px-3 pt-2 pb-1 uppercase tracking-wider font-semibold;
+  @apply inline-block rounded-lg shadow-lg bg-blue-600 text-gray-300 text-xs text-white px-3 py-2 uppercase tracking-wider font-semibold;
 }
 
 .btn:hover {
-  @apply bg-blue-500;
+  @apply bg-blue-500 text-gray-300;
 }
 
 .btn:focus {
-  @apply outline-none shadow-outline;
+  @apply outline-none shadow-outline text-gray-300;
 }
 
 .btn:active {
-  @apply bg-blue-700;
+  @apply bg-blue-700 text-gray-300;
 }
 
-.active a {
+a {
+  @apply text-blue-500
+}
+
+a:hover {
+  @apply text-blue-400
+}
+
+a:active, .active {
 @apply text-blue-600;
 }
 
 form {
-  @apply text-gray-700;
+  @apply text-gray-800;
 }
 
-label {
-  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+#delivery label {
+  @apply block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2;
 }
 
 #admin label {
-  @apply text-gray-200;
+  @apply text-gray-300;
 }
 
-#cart-form input, #cart-form textarea {
-  @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight;
+#cart-form input.string, #cart-form textarea {
+  @apply appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-800 rounded py-3 px-4 leading-tight;
 }
 
-#cart-form input:focus, #cart-form textarea:focus, #cart-form select:focus, .form-select:focus {
-  @apply outline-none bg-white border-gray-500 shadow-none;
+#cart-form input.string:focus, #cart-form textarea:focus, #cart-form select:focus, .form-select:focus {
+  @apply outline-none bg-gray-200 border-gray-800 shadow-none;
 }
 
 #cart-form select, .form-select {
-  @apply block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
+  @apply block appearance-none w-full bg-gray-300 border border-gray-800 text-gray-800 py-3 px-4 pr-8 rounded leading-tight;
 }
 
 #cart-form .error {
@@ -58,4 +70,57 @@ label {
 
 #cart-form .field_with_errors input, #cart-form .field_with_errors textarea {
   @apply border-red-500;
+}
+
+.info {
+  @apply
+}
+
+table {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  @apply table-auto inline-block p-2 my-6 bg-blue-200 border border-blue-800 rounded;
+}
+
+th, td {
+  @apply px-4 py-2;
+}
+
+#payment_channels, .alert {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+#payment_channels label {
+  @apply flex flex-wrap items-center cursor-pointer;
+}
+
+#payment_channels img {
+  width: 100px;
+  height: 50px;
+}
+
+#payment_channels .radio {
+  @apply inline-block mr-4 mb-2;
+}
+
+#payment_channels label span {
+    @apply bg-gray-200;
+    transition: background .2s,
+      transform .2s;
+}
+
+#payment_channels input[type="radio"] + span:hover,
+#payment_channels label:hover span{
+  transform: scale(1.2);
+}
+
+#payment_channels input[type="radio"]:checked + span {
+  @apply bg-blue-500;
+}
+
+input:checked + svg {
+  	display: block;
+  }
+
+footer {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='1' viewBox='0 0 40 1' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v1H0z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }

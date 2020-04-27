@@ -1,8 +1,8 @@
-<h2>Twój koszyk</h2>
+<h2>Koszyk</h2>
 <% if @cart.line_items.empty? %>
   <p>Twój koszyk jest pusty!</p>
 <% else %>
-  <table class="">
+  <table>
     <thead>
       <th>Produkt</th>
       <th>Liczba sztuk</th>
@@ -19,7 +19,7 @@
           <td><%= number_to_currency line_item.full_price %></td>
           <td>
             <%= link_to remove_product_cart_path(product_id: line_item.product.id), method: :post do %>
-              <span>remove</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="18"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/></svg>
             <% end %>
           </td>
         </tr>
@@ -29,8 +29,7 @@
 
   <p>
     <%= link_to edit_cart_path, class: "btn" do %>
-      Przejdź dalej
-      <span class="fa fa-step-forward"></span>
+      Przejdź dalej >>
     <% end %>
   </p>
 <% end %>

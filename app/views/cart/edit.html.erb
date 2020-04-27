@@ -1,41 +1,80 @@
-<h2>Dostawa</h2>
-<%= simple_form_for @cart, :html=> { id: 'cart-form', class: 'w-full max-w-lg' }, url: cart_path do |f| %>
+<%= simple_form_for @cart, :html=> { id: 'cart-form', class: 'w-full' }, url: cart_path do |f| %>
     <%= f.simple_fields_for :address do |a| %>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
-          <%= a.input :email %>
+      <div class="flex flex-wrap">
+        <div id="payments" class="w-3/5">
+          <h2>Płatność</h2>
+          <div id="payment_channels" class="relative text-center px-10 py-6 bg-blue-200 border border-blue-800 rounded">
+            <%= f.input :payment_channel, as: :radio_buttons, label: false, input_html: { class: "inline-block hidden" }, collection: receive_payment_methods, label_method: :second, value_method: :first %>
+            <%= image_tag 'dp_logo_whte_alpha', class: "absolute right-0 bottom-0 mb-2 mr-2", style: "width: 100px; height: 29px;" %>
+          </div>
+          <div class="text-xs">
+            <label class="flex justify-start items-start mt-4">
+              <div class="bg-gray-200 border rounded border-gray-600 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
+                <%= f.check_box :bylaw, value: '1', class: "hidden", label: false, wrapper: false, error: 'Zaakceptuj regulamin, aby kontynuować.' %>
+                <svg class="fill-current hidden w-4 h-4 text-blue-500 pointer-events-none" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+              </div>
+              <div class="select-none">
+                Akceptuję <a title="regulamin płatności"target="_blank" href="https://ssl.dotpay.pl/t2/cloudfs1/magellan_media/regulamin_platnosci">Regulamin płatności</a> Dotpay sp. z o.o..
+              </div>
+            </label>
+            <label class="flex justify-start items-start mt-4">
+              <div class="bg-gray-200 border rounded border-gray-600 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
+                <%= f.check_box :personal_data, value: '1', class: "hidden", label: false, wrapper: false, error: 'Zaakceptuj regulamin, aby kontynuować.' %>
+                <svg class="fill-current hidden w-4 h-4 text-blue-500 pointer-events-none" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+              </div>
+              <div class="select-none">
+                Przyjmuję do wiadomości, że w celu realizacji procesu płatności Administratorem moich danych osobowych jest Dotpay sp. z o.o. (KRS 0000700791), 30-552 Kraków (Polska), Wielicka 28B, +48126882600, <a href="mailto:bok@dotpay.pl">bok@dotpay.pl</a>, zobacz <a title="regulamin" target="_blank" href="https://ssl.dotpay.pl/t2/cloudfs1/magellan_media/rodo">pełną treść klauzuli informacyjnej</a>.
+              </div>
+            </label>
+          </div>
+        </div>
+        <div id="delivery" class="w-2/5 pl-10 pb-6">
+          <h2>Dostawa</h2>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <%= a.input :first_name, error: false %>
+            </div>
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <%= a.input :last_name, error: false %>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+              <%= a.input :city, error: false %>
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <%= a.input :zip_code, error: false %>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3 mb-6 md:mb-0">
+              <%= a.input :street, error: false %>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3">
+              <%= a.input :email, error: false %>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <%= a.input :phone, as: :string, error: false %>
+            </div>
+          </div>
+          <% end %>
+          <div class="relative mb-6">
+            <%= f.association :shipping_type, as: :select, prompt: nil, input_html: { class: 'form-select' } %>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 mt-6 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <%= f.input :comment %>
+            </div>
+          </div>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= button_tag class: "btn mb-6" do %>
+            Zapisz i przejdź do podsumowania >>
+          <% end %>
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <%= a.input :first_name %>
-        </div>
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <%= a.input :last_name %>
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <%= a.input :city %>
-        </div>
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <%= a.input :zip_code %>
-        </div>
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <%= a.input :street %>
-        </div>
-      </div>
-      <% end %>
-      <div class="relative mb-6">
-        <%= f.association :shipping_type, as: :select, prompt: nil, input_html: { class: 'form-select' } %>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
-          <%= f.input :comment %>
-        </div>
-      </div>
-      <%= button_tag class: "btn mb-6" do %>
-        Zapisz i przejdź dalej
-        <span class="">>></span>
-      <% end %>
 <% end %>

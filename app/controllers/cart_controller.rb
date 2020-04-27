@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:finish]
   def show
     @cart = current_cart
   end
@@ -10,6 +11,7 @@ class CartController < ApplicationController
 
   def update
     @cart = current_cart
+    @types = Order.select(:payment_channel).distinct
     if @cart.update_attributes(cart_attributes)
       @cart.update_attribute(:shipping_cost, @cart.shipping_type.cost)
       redirect_to confirmation_cart_path
@@ -20,14 +22,24 @@ class CartController < ApplicationController
 
   def confirmation
     @cart = current_cart
+    @id = "770516"
+    @amount = @cart.full_cost.to_s
+    @currency = "PLN"
+    @description = "Zamówienie numer " + current_cart.address.order_id.to_s
+    @channel = current_cart.payment_channel.to_s
+    @type = "4"
+    @url = finish_cart_url
+    @firstname = current_cart.address.first_name
+    @lastname = current_cart.address.last_name
+    @email = current_cart.address.email
+    @bylaw = "1"
+    @personal_data = "1"
   end
 
   def finish
     @cart = current_cart
     @cart.transition_to :confirmed
     session.delete(:order_id)
-    flash[:notice] = "Dziękujemy za zamówienie!"
-    redirect_to root_path
   end
 
   def add_product
@@ -61,13 +73,17 @@ class CartController < ApplicationController
     params.require(:order).permit(
       :shipping_type_id,
       :comment,
+      :payment_channel,
+      :bylaw,
+      :personal_data,
       :address_attributes => [
         :first_name,
         :last_name,
         :city,
         :zip_code,
         :street,
-        :email
+        :email,
+        :phone
       ]
     )
   end
