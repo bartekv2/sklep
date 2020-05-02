@@ -38,8 +38,13 @@ class CartController < ApplicationController
 
   def finish
     @cart = current_cart
-    @cart.transition_to :confirmed
-    session.delete(:order_id)
+    if params[:status] == 'OK'
+      @cart.transition_to :confirmed
+      session.delete(:order_id)
+      @ok = true
+    else
+      @ok = false
+    end
   end
 
   def add_product
