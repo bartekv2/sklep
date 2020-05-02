@@ -1,18 +1,49 @@
 <div class="flex">
-  <div>
-  <h2><%= @product.name %></h2>
-  <p class="text-lg py-2"><%= @product.description %></p>
-  <%= simple_format(@product.long_description) %>
-
-  <p class="text-xl py-2"><%= number_to_currency(@product.price) %></p>
-  <p>
-    <%= link_to add_product_cart_path(product_id: @product.id), method: :post, class: "btn py-4" do %>
-      <svg class="h-4 w-4 mb-px mr-1 fill-current inline-block" viewBox="0 0 20 20"><path d="M13 17a2 2 0 103.999.001A2 2 0 0013 17zM3 17a2 2 0 104 0 2 2 0 00-4 0zm3.547-4.828L17.615 9.01A.564.564 0 0018 8.5V3H4V1.4c0-.22-.181-.4-.399-.4H.399A.401.401 0 000 1.4V3h2l1.91 8.957.09.943v1.649c0 .219.18.4.4.4h13.2c.22 0 .4-.182.4-.4V13H6.752c-1.15 0-1.174-.551-.205-.828z"/></svg>
-      do koszyka
-    <% end %>
-  </p>
+  <div class="mr-6">
+    <%= image_tag @product.photo.url(:details), class: "rounded-lg shadow-xl" %>
   </div>
   <div>
-    <%= image_tag @product.photo.url(:details), class: "rounded-lg shadow-xl" %>
+    <h2><%= @product.name %></h2>
+    <p class="text-lg py-2"><%= @product.description %></p>
+    <%= simple_format(@product.long_description) %>
+    <p class="text-xl py-2"><%= number_to_currency(@product.price) %></p>
+    <%= form_with model: @new_item, url: add_product_cart_path(product_id: @product.id) do |f| %>
+      <ul id="sizes" class="flex mb-6">
+        <% @variants.each do |variant| %>
+          <li>
+            <% if variant.quantity > 0 %>
+              <%= f.radio_button :selected_item, variant.id, class: "hidden" %>
+            <% else %>
+              <%= f.radio_button :selected_item, variant.id, disabled: true, class: "hidden" %>
+            <% end %>
+            <span><%= f.label :selected_item, variant.size.name, :value => variant.id %></span>
+          </li>
+        <% end %>
+      </ul>
+      <div>
+        <% if !flash.empty? %>
+          <% flash.each do |type, msg| %>
+            <div class="<%= type %> rounded">
+              <div class="flex items-center">
+                <% if type == "notice" %>
+                  <svg class="fill-current h-6 w-6 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
+                <% else %>
+                  <svg class="fill-current h-6 w-6 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 5h2v6H9V5zm0 8h2v2H9v-2z"/></svg>
+                <% end %>
+                <%= msg %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <% if @quantity > 0 %>
+        <%= button_tag(type: 'submit', class: "btn py-4") do %>
+        <svg class='h-4 w-4 mb-1 mr-1 fill-current inline-block' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M4 2h16l-3 9H4a1 1 0 1 0 0 2h13v2H4a3 3 0 0 1 0-6h.33L3 5 2 2H0V0h3a1 1 0 0 1 1 1v1zm1 18a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm10 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z'/></svg>
+        do koszyka
+        <% end %>
+      <% else %>
+        Produkt chwilowo niedostępny.
+      <% end %>
+    <% end %>
   </div>
 </div>

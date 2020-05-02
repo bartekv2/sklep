@@ -48,6 +48,8 @@ GEM
     activerecord (6.0.2.1)
       activemodel (= 6.0.2.1)
       activesupport (= 6.0.2.1)
+    activerecord_where_assoc (1.1.1)
+      activerecord (>= 4.1.0)
     activestorage (6.0.2.1)
       actionpack (= 6.0.2.1)
       activejob (= 6.0.2.1)
@@ -274,6 +276,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to (~> 1.0, >= 1.0.5)
+  activerecord_where_assoc (~> 1.0)
   bootsnap (>= 1.4.2)
   byebug
   capistrano (~> 3.11, >= 3.11.2)

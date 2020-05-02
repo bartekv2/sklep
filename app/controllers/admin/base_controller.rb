@@ -5,8 +5,7 @@ class Admin::BaseController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_basic 'Podaj hasło!' do |name, password|
-      #name == ENV['SKLEP_NAME'] && password == ENV['SKLEP_PASSWORD']
-      name == 'bartek' && password == 'tragediaW4aktach'
+      name == Rails.application.credentials.dig(:admin, :name) && password == Rails.application.credentials.dig(:admin, :password)
     end
   end
 end

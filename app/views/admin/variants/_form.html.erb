@@ -1,0 +1,19 @@
+<h3 class="font-bold my-4"><%= @product_name %></h3>
+<%= simple_form_for [:admin, @variant], :html=> { class: 'w-48' } do |f| %>
+  <div class="relative">
+    <%= f.association :size, label: "Rozmiar", prompt: nil, input_html: { class: 'form-select w-full' } %>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 mt-6 text-gray-700">
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+    </div>
+  </div>
+  <div class="relative">
+    <%= f.association :color, label: "Kolor", prompt: nil, input_html: { class: 'form-select w-full' } %>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 mt-6 text-gray-700">
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+    </div>
+  </div>
+  <%= f.input :quantity, label: "Liczba sztuk" %>
+  <%= f.input :product_name, :as => :hidden, :input_html => { :value => @product_name } %>
+  <%= f.input :product_id, :as => :hidden, :input_html => { :value => @product_id } %>
+  <%= f.submit class: "btn cursor-pointer mt-4" %>
+<% end %>

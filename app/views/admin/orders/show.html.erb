@@ -12,7 +12,7 @@
       <tbody>
         <% @order.line_items.each do |line_item| %>
           <tr>
-            <td><%= link_to line_item.item_name, product_path(line_item.product) %>
+            <td><%= link_to line_item.item_name, product_path(line_item.product) %> rozmiar <%= line_item.item_size %></td>
             <td><%= line_item.quantity %></td>
             <td><%= number_to_currency line_item.unit_price %></td>
             <td><%= number_to_currency line_item.full_price %></td>

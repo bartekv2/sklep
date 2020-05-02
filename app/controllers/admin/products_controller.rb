@@ -2,6 +2,7 @@ class Admin::ProductsController < Admin::BaseController
   def index
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true).page(params[:page]).per(30)
+    @variants = Variant.all
   end
 
   def new
@@ -24,7 +25,7 @@ class Admin::ProductsController < Admin::BaseController
   def update
     @product = Product.find(params[:id])
     if @product.update_attributes(product_params)
-      redirect_to admin_products_path, notice: "Pomyślnie usunięto produkt"
+      redirect_to admin_products_path, notice: "Pomyślnie zmieniono produkt"
     else
       render action: :edit
     end

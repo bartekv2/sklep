@@ -1,9 +1,14 @@
 <%= simple_form_for [:admin, @product], :html=> { class: 'w-full max-w-lg' } do |f| %>
-  <%= f.input :name, input_html: { class: 'form-input w-full mb-6' } %>
-  <%= f.input :description, input_html: { class: 'form-input w-full mb-6' } %>
-  <%= f.input :long_description, input_html: { class: 'form-input w-full mb-6' } %>
-  <%= f.input :price, input_html: { class: 'form-input w-full mb-6' } %>
-  <%= f.association :category, input_html: { class: 'form-input w-full mb-6' } %>
+  <%= f.input :name, input_html: { class: 'form-input w-full' } %>
+  <%= f.input :description, input_html: { class: 'form-input w-full' } %>
+  <%= f.input :long_description, input_html: { class: 'form-input w-full' } %>
+  <%= f.input :price, input_html: { class: 'form-input w-full' } %>
+  <div class="relative">
+    <%= f.association :category, input_html: { class: 'form-select w-full' } %>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 mt-6 text-gray-700">
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+    </div>
+  </div>
   <%= f.input :photo, input_html: { class: 'mb-6' } %>
   <%= f.submit class: "btn cursor-pointer" %>
 <% end %>

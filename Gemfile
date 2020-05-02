@@ -38,6 +38,7 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'rails-i18n', '~> 6.0'
 gem 'statesman', '~> 7.0', '>= 7.0.1'
 gem 'active_link_to', '~> 1.0', '>= 1.0.5'
+gem 'activerecord_where_assoc', '~> 1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -27,3 +27,10 @@ pl:
         shipping_type: 'Sposób dostawy'
         comment: 'Komentarz'
         phone: 'Numer telefonu'
+
+  produkt:
+    zero: '0 produktów'
+    one: '1 produkt'
+    few: '%{count} produkty'
+    many: '%{count} produktów'
+    other: '%{count} produktów'

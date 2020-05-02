@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     root to: 'products#index'
     resources :products
     resources :categories
+    resources :variants
     resources :orders, only: [:show, :index, :update]
   end
 

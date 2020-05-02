@@ -13,7 +13,7 @@ h2 {
 }
 
 .btn {
-  @apply inline-block rounded-lg shadow-lg bg-blue-600 text-gray-300 text-xs text-white px-3 py-2 uppercase tracking-wider font-semibold;
+  @apply inline-block rounded-lg shadow-lg bg-blue-600 text-gray-300 text-white px-3 py-2 uppercase tracking-wider font-semibold;
 }
 
 .btn:hover {
@@ -26,6 +26,22 @@ h2 {
 
 .btn:active {
   @apply bg-blue-700 text-gray-300;
+}
+
+#admin .btn {
+  @apply bg-gray-600 text-xs;
+}
+
+#admin .btn:hover {
+  @apply bg-gray-500;
+}
+
+#admin .btn:focus {
+  @apply outline-none shadow-outline text-gray-300;
+}
+
+#admin .btn:active {
+  @apply bg-gray-700;
 }
 
 a {
@@ -52,19 +68,31 @@ form {
   @apply text-gray-300;
 }
 
-#cart-form input.string, #cart-form textarea {
+#cart-form input.string, #cart-form textarea, #admin input.string, #admin textarea, #admin input.numeric {
   @apply appearance-none block w-full bg-gray-300 text-gray-800 border border-gray-800 rounded py-3 px-4 leading-tight;
 }
 
-#cart-form input.string:focus, #cart-form textarea:focus, #cart-form select:focus, .form-select:focus {
+#admin .product_search input.form-input {
+  @apply bg-gray-300 text-gray-800 border border-gray-800 rounded py-2 px-3;
+}
+
+#admin input.file {
+  @apply text-gray-200 ml-2;
+}
+
+#admin input.disabled {
+  @apply bg-gray-500 text-gray-700;
+}
+
+#cart-form input.string:focus, #cart-form textarea:focus, #cart-form select:focus, .form-select:focus, #admin input.string:focus, #admin textarea:focus, #admin select:focus, {
   @apply outline-none bg-gray-200 border-gray-800 shadow-none;
 }
 
-#cart-form select, .form-select {
+#cart-form select, .form-select, #admin select {
   @apply block appearance-none w-full bg-gray-300 border border-gray-800 text-gray-800 py-3 px-4 pr-8 rounded leading-tight;
 }
 
-#cart-form .error {
+#cart-form .error, #admin .error {
   @apply text-red-500 text-xs italic;
 }
 
@@ -72,21 +100,33 @@ form {
   @apply border-red-500;
 }
 
-.info {
-  @apply
-}
-
 table {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
   @apply table-auto inline-block p-2 my-6 bg-blue-200 border border-blue-800 rounded;
+}
+
+#admin table {
+  @apply bg-gray-700;
 }
 
 th, td {
   @apply px-4 py-2;
 }
 
-#payment_channels, .alert {
+#cart-link {
+  @apply p-2 border border-blue-800 rounded;
+}
+
+.alert, .notice, #payment_channels, #cart-link {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.alert {
+  @apply inline-block border border-red-400 bg-red-100 px-4 py-3 mb-6 text-red-700;
+}
+
+.notice {
+  @apply inline-block border border-teal-500 bg-teal-100 px-4 py-3 mb-6 text-teal-900;
 }
 
 #payment_channels label {
@@ -115,6 +155,27 @@ th, td {
 
 #payment_channels input[type="radio"]:checked + span {
   @apply bg-blue-500;
+}
+
+#sizes label {
+  @apply cursor-pointer;
+}
+
+#sizes .radio {
+  @apply inline-block;
+}
+
+#sizes input[type="radio"]:checked + span label {
+  @apply bg-blue-500 text-gray-200;
+}
+
+#sizes input[type="radio"]:disabled + span label {
+  @apply text-gray-500 border-gray-500 cursor-default;
+}
+
+#sizes li span label {
+  @apply inline-block w-8 h-8 mr-4 border border-blue-800 rounded text-center;
+  padding-top: 2px;
 }
 
 input:checked + svg {

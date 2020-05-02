@@ -45,25 +45,37 @@ class CartController < ApplicationController
   def add_product
     order = current_cart_or_create
     product = Product.find(params[:product_id])
-    if item = order.line_items.where(product: product).first
-      item.quantity += 1
-      item.save
+    variants = product.variants
+    if !params[:selected_item].nil?
+      variant_id = params[:selected_item]
+      if item = order.line_items.where(product: product, variant_id: variant_id).first
+        item.quantity += 1
+        item.save
+      else @new_item = order.line_items.create product: product,
+          quantity: 1,
+          unit_price: product.price,
+          item_name: product.name,
+          variant_id: variant_id
+      end
+      selected_variant = variants.find(variant_id)
+      selected_variant.quantity -= 1
+      selected_variant.save
+      redirect_back fallback_location: root_path, notice: "Dodano produkt do koszyka"
     else
-      order.line_items.create product: product,
-      quantity: 1,
-      unit_price: product.price,
-      item_name: product.name
+      redirect_back fallback_location: root_path, alert: "Proszę wybrać rozmiar!"
     end
-    redirect_back fallback_location: root_path, notice: "Dodano produkt do koszyka"
   end
 
   def remove_product
     order = current_cart
     product = Product.find(params[:product_id])
+    selected_variant = Variant.find(params[:variant_id])
     item = order.line_items.where(product: product).first
     if item
       item.destroy
     end
+    selected_variant.quantity += params[:item_quantity].to_i
+    selected_variant.save
     redirect_back fallback_location: root_path, notice: "Usunięto produkt z koszyka"
   end
 
