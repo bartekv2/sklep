@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'faker', '~> 2.10'
 gem 'letter_opener', '~> 1.7'
-gem 'carrierwave', '~> 2.0', '>= 2.0.2'
+gem 'carrierwave', '~> 2.1'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 gem 'simple_form', '~> 5.0', '>= 5.0.1'
 gem 'tailwindcss', '~> 1.0', '>= 1.0.3'
